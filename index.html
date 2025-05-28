@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog de la Profesora</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --main-color: #f4c6c6;
+      --accent-color: #c29292;
+      --hover-color: #eabfbf;
+      --background: #fff8f5;
+      --text-color: #333;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--background);
+      color: var(--text-color);
+      animation: fadeBody 2s ease-in;
+    }
+    @keyframes fadeBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    header {
+      background: var(--accent-color);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      animation: slideDown 1.5s ease-out;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    nav {
+      background: var(--main-color);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 1rem;
+      gap: 1rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--hover-color);
+    }
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+    section {
+      margin-bottom: 3rem;
+      animation: fadeInSection 1.5s ease-in;
+    }
+    @keyframes fadeInSection {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+    }
+    p, li {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+      margin: 1rem auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    img:hover {
+      transform: scale(1.03);
+    }
+    #inicio img {
+      max-width: 400px;
+      width: 90%;
+      height: auto;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    button {
+      background: var(--accent-color);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    button:hover {
+      background: var(--hover-color);
+      transform: translateY(-2px);
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .social-icons a img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+      display: block;
+    }
+    .social-icons a img:hover {
+      transform: scale(1.2);
+    }
+    .comment-box {
+      margin-top: 2rem;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .comment-box textarea {
+      width: 100%;
+      height: 120px;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+      font-family: 'Roboto', sans-serif;
+    }
+    .comment-box button {
+      margin-top: 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background-color: var(--accent-color);
+      color: white;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+    }
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      #inicio img {
+        max-width: 300px;
+      }
+      .gallery img {
+        height: 180px;
+      }
+      header {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>Blog de la Profesora</header>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#materias">Materias</a>
+    <a href="#reconocimientos">Reconocimientos</a>
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <main>
+    <section id="inicio">
+      <h2>Biografía Personal</h2>
+      <p>Profesora con más de 25 años de experiencia en la Universidad Juárez Autónoma de Tabasco. Apasionada por la enseñanza y el desarrollo académico de sus estudiantes.</p>
+      <p>Comprometida con la formación de profesionales íntegros, impulsa la participación estudiantil en proyectos, concursos y actividades extracurriculares. Siempre dispuesta a brindar asesoría y acompañamiento académico.</p>
+      <img src="SD.jpg" alt="Foto de la profesora" />
+    </section>
+    <section id="experiencia">
+      <h2>Experiencia Docente</h2>
+      <p>He impartido materias en diversas áreas de la computación y la ingeniería, liderando proyectos académicos y colaborando en investigación.</p>
+      <p>Además, he sido mentora en múltiples concursos de programación y organizadora de seminarios universitarios.</p>
+    </section>
+    <section id="materias">
+      <h2>Materias Impartidas</h2>
+      <ul>
+        <li>Programación 1</li>
+        <li>Sistemas Distribuidos</li>
+        <li>Bases de Datos</li>
+        <li>Inteligencia Artificial</li>
+        <li>Desarrollo de Software</li>
+        <li>Seguridad Informática</li>
+      </ul>
+    </section>
+    <section id="reconocimientos">
+      <h2>Reconocimientos</h2>
+      <ul>
+        <li>Premio a la Excelencia Académica 2022</li>
+        <li>Reconocimiento a la Innovación Educativa</li>
+        <li>Reconocimiento por trayectoria docente 25 años</li>
+      </ul>
+    </section>
+    <section id="galeria">
+      <h2>Galería</h2>
+      <div class="gallery">
+        <img src="Laboratorioscomputo.jpg" alt="Laboratorio de Cómputo" onclick="openLightbox(this.src)">
+        <img src="Conferencias.jpg" alt="Conferencia" onclick="openLightbox(this.src)">
+        <img src="Asesorando.jpg" alt="Asesoría" onclick="openLightbox(this.src)">
+      </div>
+    </section>
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <section>
+      <h2>Accesos Directos</h2>
+      <div class="button-group">
+        <button onclick="location.href='clases.html'">📘 Ver Clases</button>
+        <button onclick="location.href='https://www.ujat.mx/'">🎓 Página UJAT</button>
+      </div>
+      <p style="margin-top: 1rem;">En esta sección puedes acceder rápidamente a las clases que normalmente imparto y una breve descripción de ellas, así como el sitio oficial de la universidad, donde encontrarás noticias, eventos y otros servicios importantes.</p>
+    </section>
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p>Redes sociales:</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/" target="_blank"><img src="Facebook Logo PNG.jpg" alt="Facebook"></a>
+        <a href="https://www.instagram.com/" target="_blank"><img src="Logo_Insta.jpg" alt="Instagram"></a>
+        <a href="https://workspace.google.com/intl/es-419_mx/gmail/" target="_blank"><img src="Gmail Logo.jpg" alt="Gmail"></a>
+      </div>
+    </section>
+    <section id="comentarios">
+      <h2>Comentarios</h2>
+      <p>Déjame tu opinión, duda o sugerencia aquí abajo:</p>
+      <div class="comment-box">
+        <textarea placeholder="Escribe tu comentario aquí..."></textarea>
+        <button onclick="alert('¡Gracias por tu comentario!')">Enviar Comentario</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Blog de la Profesora | UJAT
+  </footer>
+  <script>
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

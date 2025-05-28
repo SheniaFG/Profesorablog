@@ -1,0 +1,202 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clases - Blog de la Profesora</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --main-color: #f4c6c6;
+      --accent-color: #c29292;
+      --hover-color: #eabfbf;
+      --background: #fff8f5;
+      --text-color: #333;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--background);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: var(--accent-color);
+      color: white;
+      padding: 1.8rem;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .accordion {
+      margin: 1rem 0;
+    }
+
+    .accordion-item {
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      background: var(--main-color);
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .accordion-header:hover {
+      background: var(--hover-color);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      background: #fff8f5;
+      padding: 0 1rem;
+    }
+
+    .accordion-content p {
+      margin: 1rem 0;
+    }
+
+    .accordion-item.active .accordion-content {
+      max-height: 300px; /* suficiente para contenido breve */
+      padding-bottom: 1rem;
+    }
+
+    .accordion-header i {
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-item.active .accordion-header i {
+      transform: rotate(180deg);
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.7rem 1.5rem;
+      background: var(--accent-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background 0.3s ease;
+      font-weight: bold;
+    }
+
+    a.back-link:hover {
+      background: var(--hover-color);
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem;
+        margin: 1rem;
+      }
+
+      .accordion-header {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>Clases de la Profesora</header>
+  <main>
+    <h2>Materias Impartidas</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span><i class="fas fa-code"></i> Programación 1</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <p>Introducción a la programación estructurada usando lenguajes como C o Python. Se abordan variables, estructuras de control, funciones y más.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span><i class="fas fa-project-diagram"></i> Sistemas Distribuidos</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <p>Estudio de sistemas con múltiples nodos interconectados. Comunicación, sincronización y tolerancia a fallos en redes de computadoras.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span><i class="fas fa-database"></i> Bases de Datos</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <p>Modelado de datos, lenguaje SQL, diseño de esquemas relacionales y administración de sistemas de bases de datos.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span><i class="fas fa-brain"></i> Inteligencia Artificial</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <p>Fundamentos de la IA: agentes inteligentes, algoritmos de búsqueda, lógica, aprendizaje automático y ética en IA.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span><i class="fas fa-gears"></i> Algoritmos Avanzados</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <p>Algoritmos de grafos, programación dinámica, estructuras de datos avanzadas y técnicas de optimización.</p>
+        </div>
+      </div>
+    </div>
+    <a href="index.html" class="back-link">← Regresar al Blog</a>
+  </main>
+
+  <script>
+    const items = document.querySelectorAll('.accordion-item');
+
+    items.forEach(item => {
+      const header = item.querySelector('.accordion-header');
+      header.addEventListener('click', () => {
+        item.classList.toggle('active');
+        items.forEach(other => {
+          if (other !== item) {
+            other.classList.remove('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
